@@ -17,7 +17,13 @@
         <div class="current-weather">
             <p class="weather-emoji">{{ emoji_map[daily['weathercode'][0]] }}</p>
             <div>
-                <h3>{{ daily['temperature_2m_max'][0] }}°C / {{ daily['temperature_2m_min'][0] }}°C</h3>
+                <h3 id="currentTemps"
+                    data-max-c="{{ daily['temperature_2m_max'][0] }}"
+                    data-min-c="{{ daily['temperature_2m_min'][0] }}"
+                    data-max-f="{{ (daily['temperature_2m_max'][0] * 9/5) + 32 | round(1) }}"
+                    data-min-f="{{ (daily['temperature_2m_min'][0] * 9/5) + 32 | round(1) }}">
+                    {{ daily['temperature_2m_max'][0] }}°C / {{ daily['temperature_2m_min'][0] }}°C
+                </h3>
                 <p>Today’s Conditions</p>
             </div>
         </div>
@@ -29,6 +35,13 @@
         <!-- Canvas for Chart -->
         <button id="unitToggle" class="toggle-btn">Switch to °F</button>
     </div>
+
+    <div class="range-container">
+        <label for="hourRange">Hours shown:</label>
+        <input type="range" id="hourRange" min="1" max="72" value="0">
+        <span id="rangeValue">24h</span>
+    </div>
+
     <div class="card fade-in">
         <canvas id="tempChart" width="600" height="300"></canvas>
     </div>
@@ -62,8 +75,17 @@
                 <div class="forecast-card">
                     <p><strong>{{ daily['time'][i] }}</strong></p>
                     <p class="weather-emoji">{{ emoji_map[daily['weathercode'][i]] }}</p>
-                    <p>High: {{ daily['temperature_2m_max'][i] }}°C</p>
-                    <p>Low: {{ daily['temperature_2m_min'][i] }}°C</p>
+                    <p class="temp-high"
+                        data-c="{{ daily['temperature_2m_max'][i] }}"
+                        data-f="{{ ((daily['temperature_2m_max'][i] * 9/5) + 32) | round(1) }}">
+                        High: {{ daily['temperature_2m_max'][i] }}°C
+                    </p>
+
+                    <p class="temp-low"
+                        data-c="{{ daily['temperature_2m_min'][i] }}"
+                        data-f="{{ ((daily['temperature_2m_min'][i] * 9/5) + 32) | round(1) }}">
+                        Low: {{ daily['temperature_2m_min'][i] }}°C
+                    </p>
                 </div>
             {% endfor %}
         </div>
