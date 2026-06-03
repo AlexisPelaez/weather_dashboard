@@ -15,7 +15,7 @@
         <h2>Weather Dashboard (Lat: {{ lat }}, Lon: {{ lon }})</h2>
 
         <div class="current-weather">
-            <img src="/static/icons/{{ daily['weathercode'][0] }}.png" width="70">
+            <p class="weather-emoji">{{ emoji_map[daily['weathercode'][0]] }}</p>
             <div>
                 <h3>{{ daily['temperature_2m_max'][0] }}°C / {{ daily['temperature_2m_min'][0] }}°C</h3>
                 <p>Today’s Conditions</p>
@@ -61,7 +61,7 @@
             {% for i in range(daily['time']|length) %}
                 <div class="forecast-card">
                     <p><strong>{{ daily['time'][i] }}</strong></p>
-                    <img src="/static/icons/{{ daily['weathercode'][i] }}.png" width="40">
+                    <p class="weather-emoji">{{ emoji_map[daily['weathercode'][i]] }}</p>
                     <p>High: {{ daily['temperature_2m_max'][i] }}°C</p>
                     <p>Low: {{ daily['temperature_2m_min'][i] }}°C</p>
                 </div>
