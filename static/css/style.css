@@ -1,0 +1,138 @@
+/* Welcome Page */
+.welcome-bg {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #87CEEB, #ffffff);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #003366;
+}
+
+.welcome-title {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.welcome-subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+.welcome-button {
+    padding: 12px 25px;
+    background: #003366;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+}
+
+.welcome-button:hover {
+    background: #0055aa;
+}
+
+.toggle-btn {
+    padding: 8px 16px;
+    margin-bottom: 15px;
+    background: #003366;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.toggle-btn:hover {
+    background: #0055aa;
+}
+
+.forecast-container {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.forecast-card {
+    padding: 10px;
+    background: #f0f4ff;
+    border-radius: 8px;
+    text-align: center;
+    width: 120px;
+}
+.city-form {
+    margin-bottom: 20px;
+}
+
+.city-form input {
+    padding: 8px;
+    width: 200px;
+}
+
+.city-form button {
+    padding: 8px 12px;
+    background: #003366;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.city-form button:hover {
+    background: #0055aa;
+}
+
+body {
+    font-family: "Inter", sans-serif;
+    background: #eef2f7; /* soft neutral gray-blue */
+    margin: 0;
+    padding: 0;
+    color: #222;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+.fade-in {
+    animation: fadeIn 0.8s ease forwards;
+    opacity: 0;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+.forecast-card {
+    animation: fadeIn 0.6s ease forwards;
+    opacity: 0;
+}
+.current-weather {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}

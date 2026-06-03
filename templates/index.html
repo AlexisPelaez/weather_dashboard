@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weather Dashboard</title>
+
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Your CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <div class="card fade-in">
+        <h2>Weather Dashboard (Lat: {{ lat }}, Lon: {{ lon }})</h2>
+
+        <div class="current-weather">
+            <img src="/static/icons/{{ daily['weathercode'][0] }}.png" width="70">
+            <div>
+                <h3>{{ daily['temperature_2m_max'][0] }}°C / {{ daily['temperature_2m_min'][0] }}°C</h3>
+                <p>Today’s Conditions</p>
+            </div>
+        </div>
+
+        <form action="/dashboard" method="get" class="city-form">
+            <input type="text" name="city" placeholder="Enter city name..." required>
+            <button type="submit">Search</button>
+        </form>
+        <!-- Canvas for Chart -->
+        <button id="unitToggle" class="toggle-btn">Switch to °F</button>
+    </div>
+    <div class="card fade-in">
+        <canvas id="tempChart" width="600" height="300"></canvas>
+    </div>
+    <div class="card fade-in">
+        <h3>Humidity</h3>
+        <canvas id="humidityChart"></canvas>
+    </div>
+    <div class="card fade-in">
+        <h3>Wind Speed</h3>
+        <canvas id="windChart"></canvas>
+    </div>
+    <div class="card fade-in">
+        <h3>Feels‑Like Temperature</h3>
+        <canvas id="feelsLikeChart"></canvas>
+    </div>
+
+    <div class="card fade-in">
+        <h3>Precipitation Probability</h3>
+        <canvas id="precipChart"></canvas>
+    </div>
+
+    <div class="card fade-in">
+        <h3>Cloud Cover</h3>
+        <canvas id="cloudChart"></canvas>
+    </div>
+
+    <div class="card fade-in">
+        <h3>7‑Day Forecast for {{ city }}</h3>
+        <div class="forecast-container">
+            {% for i in range(daily['time']|length) %}
+                <div class="forecast-card">
+                    <p><strong>{{ daily['time'][i] }}</strong></p>
+                    <img src="/static/icons/{{ daily['weathercode'][i] }}.png" width="40">
+                    <p>High: {{ daily['temperature_2m_max'][i] }}°C</p>
+                    <p>Low: {{ daily['temperature_2m_min'][i] }}°C</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Inject Flask data BEFORE loading external JS -->
+    <script>
+        const HOURS = {{ hours | tojson }};
+        const TEMPS = {{ temps | tojson }};
+        const FEELS_LIKE = {{ feels_like | tojson }};
+        const PRECIP_PROB = {{ precip_prob | tojson }};
+        const CLOUDCOVER = {{ cloudcover | tojson }};
+        const HUMIDITY = {{ humidity | tojson }};
+        const WIND = {{ wind | tojson }};
+    </script>
+
+    <!-- Your external JS file -->
+    <script src="{{ url_for('static', filename='js/chart.js') }}"></script>
+</body>
+</html>
